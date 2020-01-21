@@ -52,7 +52,7 @@
     <!-- SQL Connections -->
 	<bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/practice" /><!-- practice is the database Schema name-->
+		<property name="url" value="jdbc:mysql://localhost:3306/practice?createDatabaseIfNotExist=true" /><!-- practice is the database Schema name....We can also Create the Data base createDatabaseIfNotExist=true-->
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
