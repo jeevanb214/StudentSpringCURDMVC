@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jeevan.dao.StudentDao;
 import com.jeevan.model.StudentDetails;
@@ -36,11 +37,14 @@ public class StudentDaoImpl implements StudentDao {
 		return 0;
 	}
 	
+	//@Transactional(readOnly = true)
 	public List<StudentDetails> listAllStudents() {
 		// TODO Auto-generated method stub
 		
 		Session session = null;
 		session = sessionFactory.openSession();
+		
+		//System.out.println("***Session.connection().isReadOnly() ::**"+session.isReadOnly(session));
 		
 		
 		List<StudentDetails> list = new ArrayList();

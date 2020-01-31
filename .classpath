@@ -37,5 +37,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/derby"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hibernate"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
+	<classpathentry kind="lib" path="C:/Users/TT093/Downloads/Office_project_jars/Ttconnect compulsary jars/gilead4gwt-1.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TT093/Downloads/Office_project_jars/Ttconnect compulsary jars/gilead-core-1.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TT093/Downloads/Office_project_jars/Ttconnect compulsary jars/gilead-hibernate-1.3.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

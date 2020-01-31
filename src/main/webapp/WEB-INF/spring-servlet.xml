@@ -19,74 +19,40 @@
 				 											The base-package is indicate where are your components stored, Spring will scan this folder and find out the bean 
 				 											(annotated with @Component) and register it in Spring container.  -->
 				 
-	<!--
- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
-		<property name="url" value="jdbc:derby://localhost:1527/SpringHibernate;create=true" />
-		<property name="username" value="user" />
-		<property name="password" value="user" />
-	</bean>
-
-	Session Factory Declaration
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.srikanth.model" />
-		<property name="hibernateProperties">
-			<props>
-				
-				<prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
-				
-				Your required Database Name
-				<prop key="hibernate.default_schema">SpringHibernate</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-				
-				<prop key="hibernate.show_sql">true</prop>
-				
-				</props>
-		</property>
-	</bean>
- -->  <!--  the above one is for Derby and below one is for sql-->
-
-
-    <!-- SQL Connections -->
-	<bean id="dataSource1" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/practice?createDatabaseIfNotExist=true" /><!-- practice is the database Schema name....We can also Create the Data base createDatabaseIfNotExist=true-->
-		<property name="username" value="root" />
-		<property name="password" value="" />
-	</bean>
-
-	<!-- Hibernate 4 SessionFactory Bean definition -->
-	<bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource1" /> <!-- Here ref="..." should be same as SQL connections that we used above -->
-		<property name="annotatedClasses">
+	   
+   
+   		<!-- <bean id="service" class="com.jeevan.service.impl.StudentServiceImpl"/> just for the usage of Injection (autowire) concept in the project
+		<bean id="dao" class="com.jeevan.dao.Impl.StudentDaoImpl"/>     
+   		 -->
+		
+    
+    
+  <!--   ******* Quartz   Scheduler***********
+    <bean id="quartz" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="triggers">
 			<list>
-				<value>com.jeevan.model.StudentDetails</value>
+				<ref bean="cronTrigger" />
 			</list>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
+		</property> 
 	</bean>
-
-
-
-
-	<tx:annotation-driven transaction-manager="transactionManager" />  <!-- tx:annotation-driven element is used to tell Spring context that we are using 
-																			annotation based transaction management configuration. 
-																			transaction-manager attribute is used to provide the transaction manager bean name -->
+    
+   
+     <bean id="runMeJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject" ref="runMeTask" /> 
+		<property name="targetMethod" value="printMe" />
+	 </bean>
 	
-	 <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />  <!-- Here ref="..." should be same as SessionFactory Bean definition it is there above -->
-   	 </bean>
-    	    
-		<bean id="service" class="com.jeevan.service.impl.StudentServiceImpl"/> <!-- just for the usage of Injection (autowire) concept in the project -->
-		<bean id="dao" class="com.jeevan.dao.Impl.StudentDaoImpl"/>      
     
+   
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="runMeJob" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
     
+   							
+    <bean id="runMeTask" class="com.jeevan.QuartzScheduler.RemoveUnwantedData" />
+    
+     -->   
+ 
 
 </beans>
