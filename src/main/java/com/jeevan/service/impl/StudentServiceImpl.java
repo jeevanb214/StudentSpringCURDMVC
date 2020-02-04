@@ -14,9 +14,15 @@ import com.jeevan.service.StudentService;
 @Service		// annotation is used in your service layer and annotates classes that perform service tasks, often you don't use it but in many case you use this annotation to represent a best practice. For example, you could directly call a DAO class to persist an object to your database but this is horrible. It is pretty good to call a service class that calls a DAO. This is a good thing to perform the separation of concerns pattern
 public class StudentServiceImpl implements StudentService {
 
-	@Autowired
+	
 	StudentDaoImpl dao;
 	
+	
+	@Autowired
+	public StudentServiceImpl(StudentDaoImpl dao) {
+		this.dao = dao;
+	}
+
 	public int addStudent(StudentDetails student) {
 		// TODO Auto-generated method stub
 		

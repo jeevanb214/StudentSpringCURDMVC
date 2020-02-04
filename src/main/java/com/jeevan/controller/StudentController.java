@@ -23,8 +23,14 @@ public class StudentController {
 	
 	
 	
-	@Autowired //this value is given in the spring-servlet.xml so that  value is directly injected to the service 
+	 //this value is given in the spring-servlet.xml so that  value is directly injected to the service 
 	StudentServiceImpl service;
+	
+	
+	@Autowired
+	public StudentController(StudentServiceImpl service) {
+		this.service = service;
+	}
 
 	@RequestMapping("/RegisterStudent")
 	public String registerStudents(Model model)
