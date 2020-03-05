@@ -17,7 +17,6 @@ public class StudentServiceImpl implements StudentService {
 	
 	StudentDaoImpl dao;
 	
-	
 	@Autowired
 	public StudentServiceImpl(StudentDaoImpl dao) {
 		this.dao = dao;
@@ -64,6 +63,11 @@ public class StudentServiceImpl implements StudentService {
 		
 		StudentDetails student = dao.getStudentObject(primary);
 		return student;
+	}
+
+	public int removeStudentWithNoName() {
+		int num=dao.removeStudentWithNoName();
+		return num;
 	}
 
 }

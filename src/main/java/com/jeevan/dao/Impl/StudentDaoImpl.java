@@ -17,7 +17,7 @@ import com.jeevan.model.StudentDetails;
 @Repository //Spring @Repository annotation is used to indicate that the class provides the mechanism for storage, retrieval, search, update and delete operation on objects.
 public class StudentDaoImpl implements StudentDao {
 
-	
+
 	@Autowired
     SessionFactory sessionFactory;
 	
@@ -107,6 +107,21 @@ public class StudentDaoImpl implements StudentDao {
 		session.flush();
 		//session.close();
 		return student;
+	}
+
+	public int removeStudentWithNoName() {
+		int num = 0;
+		List<StudentDetails> studentList = listAllStudents();
+
+		for (StudentDetails studentDetails : studentList) {
+			if (studentDetails.getsName() == null || studentDetails.getsName().equals("")
+					|| studentDetails.getsName() == "") {
+				deleteStudent(studentDetails.getId());
+				num++;
+			}
+
+		}
+		return num;
 	}
 
 }

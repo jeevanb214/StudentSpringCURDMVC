@@ -15,4 +15,7 @@ public interface StudentDao {
 	public int deleteStudent(int primary);
 	
 	public StudentDetails getStudentObject(int primary);
+	
+	public int removeStudentWithNoName();
+
 }
